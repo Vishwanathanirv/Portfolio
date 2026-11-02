@@ -5,15 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="author" content="Vishwanathan R">
 <meta name="theme-color" content="#F8F7F4">
-<meta property="og:type" content="website">
+<link rel="canonical" href="https://vishwanathan.dev/">
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://vishwanathan.dev/">
+<meta property="og:site_name" content="Vishwanathan R">
 <meta property="og:title" content="Vishwanathan R">
-<meta property="og:description" content="Building products end to end, from the interface to the server. Projects, research, skills and journey.">
+<meta property="og:description" content="Vishwanathan R, a developer who builds things for the love of it, from the interface to the server. RHCSA certified. Projects, skills, journey and research.">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vishwanathan R">
-<meta name="twitter:description" content="Building products end to end, from the interface to the server.">
+<meta name="twitter:description" content="Vishwanathan R, a developer who builds things for the love of it, from the interface to the server. RHCSA certified. Projects, skills, journey and research.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23EDDDD6'/%3E%3Cstop offset='.5' stop-color='%23DFE7D8'/%3E%3Cstop offset='1' stop-color='%23E4E0EC'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-family='Arial,sans-serif' font-size='24' font-weight='700' fill='%23141619'%3EVR%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Vishwanathan R", "url": "https://vishwanathan.dev/", "email": "mailto:vishwanathanirv@gmail.com", "alumniOf": {"@type": "CollegeOrUniversity", "name": "Sri Krishna College of Engineering and Technology"}, "hasCredential": {"@type": "EducationalOccupationalCredential", "name": "Red Hat Certified System Administrator (RHCSA)"}, "knowsAbout": ["Java", "JavaScript", "TypeScript", "Next.js", "Node.js", "Linux", "RHEL", "Network security", "Networking"], "sameAs": ["https://github.com/vishwanathanirv", "https://www.linkedin.com/in/vishwanathanirv", "https://leetcode.com/u/vishwanathanirv/", "https://www.chess.com/member/coralctrl", "https://www.instagram.com/aadhivishwanathan/", "https://buymeacoffee.com/vishwanathanirv"], "description": "Developer who builds things for the love of it, from the interface to the server."}</script>
 <title>Vishwanathan R</title>
-<meta name="description" content="Vishwanathan R — engineer building products end to end. Projects, research, skills, career and contact.">
+<meta name="description" content="Vishwanathan R, a developer who builds things for the love of it, from the interface to the server. RHCSA certified. Projects, skills, journey and research.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Geist+Mono:wght@400;500&display=swap">
@@ -122,6 +126,8 @@ section{padding-block:52px;scroll-margin-top:64px}
 /* hero badges: classic legendary hex */
 .badges{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
 .cert{position:relative;width:58px;height:66px}
+.cert.legend{display:block;cursor:pointer;transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
+.cert.legend:hover{transform:translateY(-2px)}
 .hex{position:absolute;inset:0;clip-path:polygon(50% 0,100% 24%,100% 76%,50% 100%,0 76%,0 24%);overflow:hidden}
 .hex::before{content:"";position:absolute;inset:-40%;background:conic-gradient(from 0deg,#F3B8C8,#F6D58A,#B7E3C4,#9CC9EE,#C9B4F0,#F3B8C8);animation:spin 5s linear infinite}
 .cert.locked .hex::before{background:linear-gradient(160deg,#E6E4DF,#CFCDC7);animation:none}
@@ -172,7 +178,7 @@ img{max-width:100%}
       <h1>Vishwanathan R</h1>
       <p class="tagline">Building products end to end, from the interface to the server.</p>
       <div class="badges" aria-label="Certifications">
-        <div class="cert legend" title="RHCSA · Red Hat Certified System Administrator · Certified" aria-label="RHCSA, certified"><div class="hex"><div class="face"><b>RHCSA</b></div></div></div>
+        <a class="cert legend" href="https://www.credly.com/badges/f35e390a-d50b-4a5c-b26b-937e6cc675c3/public_url" target="_blank" rel="noopener" title="RHCSA · Red Hat Certified System Administrator · Verify on Credly" aria-label="RHCSA certified, verify on Credly"><div class="hex"><div class="face"><b>RHCSA</b></div></div></a>
         <div class="cert locked" title="CCNA · Cisco Certified Network Associate · Exam Nov 2026" aria-label="CCNA, exam November 2026"><div class="hex"><div class="face"><svg class="lock" viewBox="0 0 10 10" aria-hidden="true"><rect x="1.5" y="4.5" width="7" height="5" rx="1" fill="currentColor"/><path d="M3 4.5V3a2 2 0 014 0v1.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><b>CCNA</b></div></div></div>
         <div class="cert locked" title="RHCE · Red Hat Certified Engineer · Exam Nov 2026" aria-label="RHCE, exam November 2026"><div class="hex"><div class="face"><svg class="lock" viewBox="0 0 10 10" aria-hidden="true"><rect x="1.5" y="4.5" width="7" height="5" rx="1" fill="currentColor"/><path d="M3 4.5V3a2 2 0 014 0v1.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><b>RHCE</b></div></div></div>
       </div>
@@ -182,7 +188,7 @@ img{max-width:100%}
 
   <section id="about" class="prose">
     <h2 class="label">About</h2>
-    <p>I'm a full-stack engineer who builds web products end to end, from the <b>interface</b> people use to the <b>servers</b> and <b>networks</b> underneath.</p>
+    <p>I'm a developer, and building things is my favourite hobby. I love making web products end to end, from the <b>interface</b> people use to the <b>servers</b> and <b>networks</b> underneath, simply because it's fun.</p>
     <p>My foundation is in Java, and I build for the web with JavaScript, Next.js and Node.js. I'm a Red Hat Certified System Administrator with a strong interest in <b>security</b>: how systems get attacked, and how to build them so they hold up.</p>
     <p>I work fluently with <b>AI</b> across my whole workflow, using it to research, prototype and ship faster while keeping the quality bar high.</p>
     <p class="soft">Outside work: chess and anime.</p>
@@ -191,25 +197,35 @@ img{max-width:100%}
   <section id="projects">
     <h2 class="label">Projects</h2>
     <div class="rows">
-      <article class="prow" style="--c:var(--saged)">
+      <article class="prow">
         <h3>Neemberry Store</h3>
         <p>A complete online store for a new wellness brand, built from scratch: checkout and payments, sign-in with phone verification, a live support chat and admin tools.</p>
         <div class="pfoot"><div class="stack">Next.js · MedusaJS · TypeScript · PostgreSQL · Docker</div><span class="stack">Private repository</span></div>
       </article>
-      <article class="prow" style="--c:var(--blushd)">
+      <article class="prow">
         <h3>Mock Interview AI</h3>
         <p>A voice interviewer that listens, adapts its next question and gives feedback. Tested over 50+ sessions with a 95% completion rate.</p>
-        <div class="pfoot"><div class="stack">Next.js · Node.js · TypeScript · Firebase · Vapi</div><a class="gh" href="https://github.com/AadhiVishwanathan" target="_blank" rel="noopener">GitHub</a></div>
+        <div class="pfoot"><div class="stack">Next.js · Node.js · TypeScript · Firebase · Vapi</div><a class="gh" href="https://github.com/Vishwanathanirv/ai_mock_interviews" target="_blank" rel="noopener">GitHub</a></div>
       </article>
-      <article class="prow" style="--c:var(--mistd)">
+      <article class="prow">
+        <h3>AccrediTech</h3>
+        <p>An AI-powered portal that automates college accreditation: OCR document checks, compliance validation, evaluator matching and application tracking.</p>
+        <div class="pfoot"><div class="stack">React · TypeScript · Node.js · Supabase · OCR</div><a class="gh" href="https://github.com/Vishwanathanirv/Accreditech-main" target="_blank" rel="noopener">GitHub</a></div>
+      </article>
+      <article class="prow">
         <h3>Network Intrusion Detection</h3>
         <p>A live network monitor that captures traffic and flags DDoS and unusual patterns the moment they appear, with alerts and simulated attacks for testing.</p>
-        <div class="pfoot"><div class="stack">Scapy · LightGBM · Isolation Forest · TCP/IP</div><a class="gh" href="https://github.com/AadhiVishwanathan" target="_blank" rel="noopener">GitHub</a></div>
+        <div class="pfoot"><div class="stack">Scapy · LightGBM · Isolation Forest · TCP/IP</div><a class="gh" href="https://github.com/Vishwanathanirv/Real-time-Intrusion-Detection-System-main" target="_blank" rel="noopener">GitHub</a></div>
       </article>
-      <article class="prow" style="--c:var(--sandd)">
+      <article class="prow">
         <h3>Payment Fraud Detection</h3>
         <p>Real-time scoring that separates genuine payments from suspicious ones, with a dashboard for live and batch checks.</p>
-        <div class="pfoot"><div class="stack">XGBoost · CatBoost · Streamlit</div><a class="gh" href="https://github.com/AadhiVishwanathan" target="_blank" rel="noopener">GitHub</a></div>
+        <div class="pfoot"><div class="stack">XGBoost · CatBoost · Streamlit</div><a class="gh" href="https://github.com/Vishwanathanirv/Online-payment-fraud-detection" target="_blank" rel="noopener">GitHub</a></div>
+      </article>
+      <article class="prow">
+        <h3>Privacy-Preserving Medical Records</h3>
+        <p>Hides encrypted patient records inside CT scans using reversible watermarking, with role-based access for doctors and patients.</p>
+        <div class="pfoot"><div class="stack">Deep learning · Cryptography · Streamlit</div><a class="gh" href="https://github.com/Vishwanathanirv/Privacy-Preserving-Medical-Records-Storage" target="_blank" rel="noopener">GitHub</a></div>
       </article>
     </div>
   </section>
@@ -283,17 +299,24 @@ img{max-width:100%}
         <div class="venue"><span class="d">Apr 2026</span><span class="n"><b>ICRCET 2026</b> <span>· IFERP Academy</span></span><span class="s">Also presented</span></div>
       </div>
     </div>
+      <div class="paper" style="margin-top:40px">
+        <h3>ML &amp; AI explorations</h3>
+        <p style="margin:8px 0 0;color:var(--muted);font-size:15.5px;font-weight:300;max-width:58ch">Independent experiments in adversarial machine learning, evolutionary algorithms, reinforcement learning, multi-agent systems and applied NLP.</p>
+        <div class="pfoot"><div class="stack">Self-directed</div><a class="gh" href="https://github.com/Vishwanathanirv/ml-ai-technical-explorations" target="_blank" rel="noopener">GitHub</a></div>
+      </div>
   </section>
 
   <section id="contact">
     <div class="reach">
       <p class="big">Let's <b>talk.</b></p>
-      <span class="mail">aadhivishwanathan@gmail.com</span>
+      <span class="mail">vishwanathanirv@gmail.com</span>
       <div class="elsewhere">
-        <a href="https://github.com/AadhiVishwanathan" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://linkedin.com/in/vishwanathanr2005" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://www.chess.com/member/aadhivishwanathan" target="_blank" rel="noopener">Chess</a>
+        <a href="https://github.com/vishwanathanirv" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/vishwanathanirv" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://leetcode.com/u/vishwanathanirv/" target="_blank" rel="noopener">LeetCode</a>
+        <a href="https://www.chess.com/member/coralctrl" target="_blank" rel="noopener">Chess</a>
         <a href="https://www.instagram.com/aadhivishwanathan/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://buymeacoffee.com/vishwanathanirv" target="_blank" rel="noopener">Buy me a coffee</a>
       </div>
     </div>
   </section>
