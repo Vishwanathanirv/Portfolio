@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="author" content="Vishwanathan R">
+<meta name="theme-color" content="#F8F7F4">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vishwanathan R">
+<meta property="og:description" content="Building products end to end, from the interface to the server. Projects, research, skills and journey.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vishwanathan R">
+<meta name="twitter:description" content="Building products end to end, from the interface to the server.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23EDDDD6'/%3E%3Cstop offset='.5' stop-color='%23DFE7D8'/%3E%3Cstop offset='1' stop-color='%23E4E0EC'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-family='Arial,sans-serif' font-size='24' font-weight='700' fill='%23141619'%3EVR%3C/text%3E%3C/svg%3E">
+<title>Vishwanathan R</title>
+<meta name="description" content="Vishwanathan R — engineer building products end to end. Projects, research, skills, career and contact.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one quiet centered column, editorial hairlines instead of boxes. Pastel ribbon at the very top, living dot monogram in the hero, sections as rows. Single light look. */
+:root{
+  --bg:#F8F7F4; --paper:#FFFFFF; --line:#E8E6E1; --hair:#EFEDE8; --ink:#141619; --muted:#6E7278; --faint:#A9ACB1; --ghost:#E6E4DF;
+  --blush:#EDDDD6; --sand:#EFE6D3; --sage:#DFE7D8; --mist:#DCE4EC; --lilac:#E4E0EC;
+  --blushd:#C9A396; --sandd:#C7AE7E; --saged:#9DB28E; --mistd:#93A9C0; --lilacd:#A79CC0;
+  --ribbon:linear-gradient(90deg,var(--blush),var(--sand),var(--sage),var(--mist),var(--lilac));
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Geist Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{background:var(--bg);scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--display);font-size:16.5px;line-height:1.75;-webkit-font-smoothing:antialiased;font-weight:400}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+a{color:inherit}
+:focus-visible{outline:1px solid var(--ink);outline-offset:4px;border-radius:4px}
+::selection{background:var(--sand)}
+.col{max-width:760px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+
+.ribbon{height:3px;background:var(--ribbon)}
+
+/* nav */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(248,247,244,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .4s}
+.bar.edge{border-bottom-color:var(--hair)}
+.bar .col{display:flex;justify-content:space-between;align-items:center;gap:16px;height:64px}
+.brand{font-weight:500;font-size:15px;letter-spacing:.01em;text-decoration:none;white-space:nowrap}
+.bar nav{display:flex;gap:26px;font-size:13.5px;letter-spacing:.01em}
+.bar nav a{position:relative;text-decoration:none;color:var(--muted);transition:color .3s;white-space:nowrap}
+.bar nav a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.bar nav a:hover,.bar nav a.on{color:var(--ink)}
+.bar nav a.on::after{transform:scaleX(1)}
+@media (max-width:680px){ .bar nav a:nth-child(1),.bar nav a:nth-child(3),.bar nav a:nth-child(4){display:none} .bar nav{gap:18px} }
+
+/* hero */
+.hero{padding-block:clamp(56px,9vw,112px) clamp(56px,8vw,96px);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:center}
+@media (max-width:640px){ .hero{grid-template-columns:1fr;gap:40px} .tour{order:-1} h1{white-space:normal} }
+h1{margin:0;font-weight:500;font-size:clamp(2.6rem,6.4vw,4.1rem);white-space:nowrap;line-height:.98;letter-spacing:-.055em}
+.tagline{margin:22px 0 0;font-size:clamp(1.1rem,1.9vw,1.3rem);font-weight:300;letter-spacing:-.01em;line-height:1.45;max-width:30ch;color:var(--ink)}
+
+.tour{display:flex;flex-direction:column;align-items:center;gap:12px}
+.board{position:relative;display:grid;grid-template-columns:repeat(5,1fr);width:clamp(160px,21vw,190px);aspect-ratio:1;max-width:100%;border-radius:10px;overflow:hidden;box-shadow:0 0 0 1px var(--line)}
+.sq{position:relative;display:grid;place-items:center;background:#F1EFEA;transition:background .7s}
+.sq.dk{background:#E7E4DD}
+.sq.v{background:var(--c)}
+.sq em{font-style:normal;font-family:var(--mono);font-size:8.5px;color:rgba(20,22,25,.45);opacity:0;transition:opacity .5s}
+.sq.v em{opacity:1}
+.knight{position:absolute;left:0;top:0;width:20%;height:20%;display:grid;place-items:center;font-size:clamp(17px,2.2vw,21px);line-height:1;color:var(--ink);transition:transform .55s cubic-bezier(.5,0,.2,1);pointer-events:none;font-family:"Segoe UI Symbol","Apple Symbols","DejaVu Sans",serif}
+.tour figcaption{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+/* sections */
+section{padding-block:52px;scroll-margin-top:64px}
+.label{display:flex;align-items:center;gap:16px;margin:0 0 36px;font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.prose p{margin:0 0 18px;max-width:58ch;font-weight:300;font-size:clamp(1.05rem,1.6vw,1.15rem);line-height:1.7}
+.prose p:last-child{margin-bottom:0}
+.prose p b{font-weight:500}
+.prose .soft{color:var(--muted);font-size:15px}
+
+/* projects as rows */
+.rows{border-top:1px solid var(--line)}
+.prow{position:relative;padding:26px 0;border-bottom:1px solid var(--line)}
+.prow h3{margin:0;font-size:1.3rem;font-weight:500;letter-spacing:-.025em;line-height:1.3}
+.prow p{margin:8px 0 0;color:var(--muted);font-size:15.5px;font-weight:300;max-width:58ch}
+.pfoot{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-top:12px}
+.gh{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:1px;transition:border-color .3s}
+.gh:hover{border-color:var(--ink)}
+.stack{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--faint)}
+
+/* research */
+.paper h3{margin:0;font-size:1.3rem;font-weight:500;letter-spacing:-.025em}
+.venues{margin-top:18px;border-top:1px solid var(--line)}
+.venue{display:grid;grid-template-columns:88px minmax(0,1fr) auto;gap:18px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--line);font-size:15px}
+@media (max-width:560px){ .venue{grid-template-columns:1fr auto;gap:2px 12px} .venue .n{grid-column:1/-1;order:3} }
+.venue .d{font-family:var(--mono);font-size:11.5px;color:var(--faint)}
+.venue .n b{font-weight:500}
+.venue .n span{color:var(--muted);font-weight:300}
+.venue .s{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.venue .s.pub{color:var(--ink)}
+.venue .s.pub::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--saged);margin-right:8px;vertical-align:1px}
+
+/* skills */
+.skills{display:flex;flex-direction:column;gap:60px}
+.sgroup h3{margin:0 0 16px;font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px}
+.sgroup h3 svg{width:16px;height:16px;color:var(--ink);flex:none}
+.sgroup ul{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.sgroup li{display:grid;grid-template-columns:250px minmax(0,1fr);gap:28px;padding:19px 0;line-height:1.55;border-bottom:1px solid var(--line);font-size:15px}
+@media (max-width:620px){ .sgroup li{grid-template-columns:1fr;gap:4px;padding:16px 0} }
+.sgroup li b{font-weight:500}
+.sgroup li span{color:var(--muted);font-weight:300}
+
+/* journey */
+.years{border-top:1px solid var(--line)}
+.year{position:relative;display:grid;grid-template-columns:160px minmax(0,1fr);gap:24px;align-items:center;padding:26px 0;border-bottom:1px solid var(--line)}
+@media (max-width:620px){ .year{grid-template-columns:1fr;gap:8px} }
+.yr{display:flex;flex-direction:column;gap:6px}
+.yr b{font-size:clamp(2.2rem,5vw,3rem);font-weight:300;letter-spacing:-.055em;line-height:1;color:var(--faint);font-variant-numeric:tabular-nums}
+.yr span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.year.now .yr b{color:var(--ink)}
+.year h3{margin:0;font-size:1.15rem;font-weight:500;letter-spacing:-.02em;line-height:1.4}
+.year h3 small{font-size:inherit;font-weight:300;color:var(--muted)}
+.year h3 span{display:block;font-size:14.5px;color:var(--muted);font-weight:300;letter-spacing:0;margin-top:2px}
+
+/* hero badges: classic legendary hex */
+.badges{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.cert{position:relative;width:58px;height:66px}
+.hex{position:absolute;inset:0;clip-path:polygon(50% 0,100% 24%,100% 76%,50% 100%,0 76%,0 24%);overflow:hidden}
+.hex::before{content:"";position:absolute;inset:-40%;background:conic-gradient(from 0deg,#F3B8C8,#F6D58A,#B7E3C4,#9CC9EE,#C9B4F0,#F3B8C8);animation:spin 5s linear infinite}
+.cert.locked .hex::before{background:linear-gradient(160deg,#E6E4DF,#CFCDC7);animation:none}
+.face{position:absolute;inset:3px;clip-path:polygon(50% 0,100% 24%,100% 76%,50% 100%,0 76%,0 24%);display:grid;place-items:center;overflow:hidden;background:linear-gradient(165deg,#FFFFFF 10%,#FBF4EA 55%,#EFE6F6)}
+.cert.locked .face{background:linear-gradient(165deg,#FAFAF8,#EEEDE9)}
+.face b{position:relative;z-index:1;font-size:12px;font-weight:700;letter-spacing:-.02em;color:var(--ink)}
+.cert.locked .face b{color:var(--faint);margin-top:8px}
+.face::after{content:"";position:absolute;top:-30%;bottom:-30%;left:-80%;width:45%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.95),transparent);transform:skewX(-18deg);animation:sheen 3.6s ease-in-out infinite}
+.cert.locked .face::after{display:none}
+.lock{position:absolute;z-index:1;top:13px;left:50%;margin-left:-4.5px;width:9px;height:9px;color:var(--faint)}
+.cert.locked{cursor:not-allowed}
+.cert.locked:hover{animation:nope .45s ease}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes sheen{0%,55%{left:-80%}100%{left:140%}}
+@keyframes nope{0%,100%{transform:none}25%{transform:translateX(-2px) rotate(-3deg)}50%{transform:translateX(2px) rotate(3deg)}75%{transform:translateX(-1px)}}
+
+/* contact */
+.reach{padding-top:24px}
+.reach .big{margin:0;font-size:clamp(2.6rem,7.4vw,4.4rem);font-weight:300;letter-spacing:-.06em;line-height:1}
+.reach .big b{font-weight:600}
+.reach .mail{display:inline-block;margin-top:30px;font-size:clamp(1.05rem,2.4vw,1.4rem);letter-spacing:-.01em;user-select:all;word-break:break-all;padding-bottom:4px;background:var(--ribbon) left bottom/100% 2px no-repeat}
+.reach .elsewhere{margin-top:26px;display:flex;gap:28px;flex-wrap:wrap;font-size:15px}
+.reach .elsewhere a{text-decoration:none;color:var(--muted);transition:color .3s}
+.reach .elsewhere a:hover{color:var(--ink)}
+footer{padding-block:40px 56px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+@media (prefers-reduced-motion:reduce){ *{transition:none!important;animation:none!important} html{scroll-behavior:auto} }
+</style>
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="ribbon" aria-hidden="true"></div>
+<div class="bar" id="bar">
+  <div class="col">
+    <a class="brand" href="#top">Vishwanathan R</a>
+    <nav aria-label="Sections"><a href="#about">About</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#journey">Journey</a><a href="#research">Research</a><a href="#contact">Contact</a></nav>
+  </div>
+</div>
+
+<main class="col" id="top">
+  <header class="hero">
+    <div>
+      <h1>Vishwanathan R</h1>
+      <p class="tagline">Building products end to end, from the interface to the server.</p>
+      <div class="badges" aria-label="Certifications">
+        <div class="cert legend" title="RHCSA · Red Hat Certified System Administrator · Certified" aria-label="RHCSA, certified"><div class="hex"><div class="face"><b>RHCSA</b></div></div></div>
+        <div class="cert locked" title="CCNA · Cisco Certified Network Associate · Exam Nov 2026" aria-label="CCNA, exam November 2026"><div class="hex"><div class="face"><svg class="lock" viewBox="0 0 10 10" aria-hidden="true"><rect x="1.5" y="4.5" width="7" height="5" rx="1" fill="currentColor"/><path d="M3 4.5V3a2 2 0 014 0v1.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><b>CCNA</b></div></div></div>
+        <div class="cert locked" title="RHCE · Red Hat Certified Engineer · Exam Nov 2026" aria-label="RHCE, exam November 2026"><div class="hex"><div class="face"><svg class="lock" viewBox="0 0 10 10" aria-hidden="true"><rect x="1.5" y="4.5" width="7" height="5" rx="1" fill="currentColor"/><path d="M3 4.5V3a2 2 0 014 0v1.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><b>RHCE</b></div></div></div>
+      </div>
+    </div>
+    <figure class="tour" style="margin:0" aria-label="A knight's tour animating across a 5 by 5 chessboard"><div class="board" id="board"></div><figcaption>Knight's tour · 5×5</figcaption></figure>
+  </header>
+
+  <section id="about" class="prose">
+    <h2 class="label">About</h2>
+    <p>I'm a full-stack engineer who builds web products end to end, from the <b>interface</b> people use to the <b>servers</b> and <b>networks</b> underneath.</p>
+    <p>My foundation is in Java, and I build for the web with JavaScript, Next.js and Node.js. I'm a Red Hat Certified System Administrator with a strong interest in <b>security</b>: how systems get attacked, and how to build them so they hold up.</p>
+    <p>I work fluently with <b>AI</b> across my whole workflow, using it to research, prototype and ship faster while keeping the quality bar high.</p>
+    <p class="soft">Outside work: chess and anime.</p>
+  </section>
+
+  <section id="projects">
+    <h2 class="label">Projects</h2>
+    <div class="rows">
+      <article class="prow" style="--c:var(--saged)">
+        <h3>Neemberry Store</h3>
+        <p>A complete online store for a new wellness brand, built from scratch: checkout and payments, sign-in with phone verification, a live support chat and admin tools.</p>
+        <div class="pfoot"><div class="stack">Next.js · MedusaJS · TypeScript · PostgreSQL · Docker</div><span class="stack">Private repository</span></div>
+      </article>
+      <article class="prow" style="--c:var(--blushd)">
+        <h3>Mock Interview AI</h3>
+        <p>A voice interviewer that listens, adapts its next question and gives feedback. Tested over 50+ sessions with a 95% completion rate.</p>
+        <div class="pfoot"><div class="stack">Next.js · Node.js · TypeScript · Firebase · Vapi</div><a class="gh" href="https://github.com/AadhiVishwanathan" target="_blank" rel="noopener">GitHub</a></div>
+      </article>
+      <article class="prow" style="--c:var(--mistd)">
+        <h3>Network Intrusion Detection</h3>
+        <p>A live network monitor that captures traffic and flags DDoS and unusual patterns the moment they appear, with alerts and simulated attacks for testing.</p>
+        <div class="pfoot"><div class="stack">Scapy · LightGBM · Isolation Forest · TCP/IP</div><a class="gh" href="https://github.com/AadhiVishwanathan" target="_blank" rel="noopener">GitHub</a></div>
+      </article>
+      <article class="prow" style="--c:var(--sandd)">
+        <h3>Payment Fraud Detection</h3>
+        <p>Real-time scoring that separates genuine payments from suspicious ones, with a dashboard for live and batch checks.</p>
+        <div class="pfoot"><div class="stack">XGBoost · CatBoost · Streamlit</div><a class="gh" href="https://github.com/AadhiVishwanathan" target="_blank" rel="noopener">GitHub</a></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2 class="label">Skills</h2>
+    <div class="skills">
+      <div class="sgroup" style="--c:var(--saged)">
+        <h3><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 4.5L2 8l3.5 3.5M10.5 4.5L14 8l-3.5 3.5"/></svg>Core</h3>
+        <ul>
+          <li><b>Java · C · C++ · SQL</b><span>My strongest languages for problem solving and data work</span></li>
+          <li><b>JavaScript · TypeScript</b><span>For web front ends and back ends</span></li>
+          <li><b>Next.js · React</b><span>Storefronts, dashboards and interactive apps</span></li>
+          <li><b>Node.js · MedusaJS</b><span>Commerce backends, APIs, payments and sign-in</span></li>
+          <li><b>Linux (RHEL)</b><span>RHCSA certified: users, services, SELinux, shell scripting</span></li>
+          <li><b>AI-assisted development</b><span>Claude and Cursor for research, prototyping and faster shipping</span></li>
+          <li><b>Git · Postman · Cloudflare</b><span>Everyday tools for shipping and testing</span></li>
+        </ul>
+      </div>
+      <div class="sgroup" style="--c:var(--blushd)">
+        <h3><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.8l5.2 1.9v3.9c0 3.2-2.2 5.6-5.2 6.6-3-1-5.2-3.4-5.2-6.6V3.7z"/><path d="M5.8 8l1.5 1.5 2.9-3"/></svg>Security</h3>
+        <ul>
+          <li><b>Network security</b><span>Packet analysis, traffic monitoring and intrusion detection</span></li>
+          <li><b>Linux hardening</b><span>SELinux, firewalls, permissions and access control</span></li>
+          <li><b>Secure web apps</b><span>Safe sign-in, verification and handling of payment flows</span></li>
+        </ul>
+      </div>
+      <div class="sgroup" style="--c:var(--mistd)">
+        <h3><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2.2l5.8 2.9L8 8 2.2 5.1z"/><path d="M2.2 8L8 10.9 13.8 8"/><path d="M2.2 10.9L8 13.8l5.8-2.9"/></svg>Comfortable with</h3>
+        <ul>
+          <li><b>PostgreSQL · Docker</b><span>Databases and containers, local and production</span></li>
+          <li><b>Firebase · Supabase</b><span>Auth, storage and realtime data</span></li>
+          <li><b>Networking</b><span>TCP/IP, routing and switching, VLANs, DNS, DHCP</span></li>
+        </ul>
+      </div>
+      <div class="sgroup" style="--c:var(--lilacd)">
+        <h3><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.8l5.5 3.1v6.2L8 14.2l-5.5-3.1V4.9z"/><path d="M2.5 4.9L8 8l5.5-3.1M8 8v6.2"/></svg>Foundations</h3>
+        <ul>
+          <li><b>Data structures · Algorithms</b><span>The basics behind fast, clean code</span></li>
+          <li><b>Operating systems · Networks</b><span>How machines and traffic really work underneath</span></li>
+          <li><b>Databases · OOP</b><span>Relational design and object-oriented thinking</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="journey">
+    <h2 class="label">Journey</h2>
+    <div class="years">
+      <div class="year now" style="--c:var(--saged)">
+        <div class="yr"><b>2026</b><span>Oct — Present</span></div>
+        <h3>Neemberry<span>Associate Product Engineer</span></h3>
+      </div>
+      <div class="year" style="--c:var(--mistd)">
+        <div class="yr"><b>2024</b><span>Oct — Dec</span></div>
+        <h3>Rainberry Inc. <small>(formerly BitTorrent)</small><span>Software Engineering Intern</span></h3>
+      </div>
+      <div class="year" style="--c:var(--blushd)">
+        <div class="yr"><b>2022</b><span>— 2026</span></div>
+        <h3>B.Tech, Information Technology<span>Sri Krishna College of Engineering and Technology, Coimbatore</span></h3>
+      </div>
+    </div>
+  </section>
+
+  <section id="research">
+    <h2 class="label">Research</h2>
+    <div class="paper">
+      <h3>AI-Based Mock Interview Platform</h3>
+      <div class="venues">
+        <div class="venue"><span class="d">Mar 2026</span><span class="n"><b>ICA6NT 2026</b> <span>· IEEE ComSoc</span></span><span class="s pub">Published</span></div>
+        <div class="venue"><span class="d">Apr 2026</span><span class="n"><b>ICRCET 2026</b> <span>· IFERP Academy</span></span><span class="s">Also presented</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="reach">
+      <p class="big">Let's <b>talk.</b></p>
+      <span class="mail">aadhivishwanathan@gmail.com</span>
+      <div class="elsewhere">
+        <a href="https://github.com/AadhiVishwanathan" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/vishwanathanr2005" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.chess.com/member/aadhivishwanathan" target="_blank" rel="noopener">Chess</a>
+        <a href="https://www.instagram.com/aadhivishwanathan/" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <footer><span>© 2026 Vishwanathan R</span><span>Made with care</span></footer>
+</main>
+
+<script>
+(function(){
+  var tour=[[1,14,9,20,3],[24,19,2,15,10],[13,8,25,4,21],[18,23,6,11,16],[7,12,17,22,5]];
+  var pal=["--blush","--sand","--sage","--mist","--lilac"],pos=[],sqs=[];
+  var board=document.getElementById("board");
+  for(var r=0;r<5;r++)for(var c=0;c<5;c++){var d=document.createElement("div");d.className="sq"+((r+c)%2?" dk":"");var n=tour[r][c];d.style.setProperty("--c","var("+pal[(n-1)%5]+")");d.innerHTML="<em>"+n+"</em>";board.appendChild(d);pos[n]=[r,c];sqs[n]=d;}
+  var kn=document.createElement("span");kn.className="knight";kn.textContent="\u265E\uFE0E";board.appendChild(kn);
+  function put(n){var q=pos[n];kn.style.transform="translate("+(q[1]*100)+"%,"+(q[0]*100)+"%)";sqs[n].classList.add("v");}
+  var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduce){for(var k=1;k<=25;k++)put(k);}
+  else{var step=1;put(1);setInterval(function(){step++;if(step>29){step=1;sqs.forEach(function(q){if(q)q.classList.remove("v");});put(1);return;}if(step<=25)put(step);},720);}
+
+  var bar=document.getElementById("bar"),links=[].slice.call(document.querySelectorAll(".bar nav a"));
+  function onScroll(){
+    bar.classList.toggle("edge",scrollY>10);
+    var cur=-1;links.forEach(function(a,i){var s=document.querySelector(a.getAttribute("href"));if(s.getBoundingClientRect().top<innerHeight*.35)cur=i;});
+    if(innerHeight+scrollY>=document.documentElement.scrollHeight-4)cur=links.length-1;
+    links.forEach(function(a,i){a.classList.toggle("on",i===cur);});
+  }
+  addEventListener("scroll",onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>
