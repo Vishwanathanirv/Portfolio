@@ -1,0 +1,16 @@
+# Vishwanathan R (Vishwanathan Rajagopal)
+
+> Developer from Tamil Nadu, India, who builds web products end to end for the love of it. Red Hat Certified System Administrator (RHCSA), first-author IEEE ComSoc paper, strong interest in security. Plays chess as coralctrl.
+
+- Website: https://vishwanathan.dev/
+- Also known as: Vishwanathan R, Vishwanathan Rajagopal, coralctrl, vishwanathanirv
+- Work: Associate Product Engineer at Neemberry (Oct 2026 – present); Software Engineering Intern at Rainberry Inc., formerly BitTorrent (Oct – Dec 2024)
+- Education: B.Tech, Information Technology, Sri Krishna College of Engineering and Technology, Coimbatore (2022 – 2026)
+- Core skills: Java, SQL, JavaScript, TypeScript, Next.js, React, Node.js, MedusaJS, PostgreSQL, Docker, Linux (RHEL)
+- Research: "AI-Based Mock Interview Platform", ICA6NT 2026, IEEE ComSoc (published); also presented at ICRCET 2026
+
+## Profiles
+- GitHub: https://github.com/Vishwanathanirv
+- LinkedIn: https://www.linkedin.com/in/vishwanathanirv
+- LeetCode: https://leetcode.com/u/Vishwanathanirv/
+- Chess.com: https://www.chess.com/member/coralctrl
