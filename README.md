@@ -1,15 +1,13 @@
-# Vishwanathan R — Portfolio
+### Hi, I'm Vishwanathan R 👋
 
-Personal portfolio site: projects, skills, journey and research.
+I'm a developer from Tamil Nadu, India, and building things is my favourite hobby. I make web products end to end, from the interface people use to the servers underneath, simply because it's fun.
 
-- Single static page: `index.html` (no build step, no dependencies)
-- Fonts: Bricolage Grotesque and Geist Mono via Google Fonts
-- Hosted on GitHub Pages
+- 🌐 **Website:** [vishwanathan.dev](https://vishwanathan.dev)
+- 💼 **Now:** Associate Product Engineer at Neemberry
+- 🎓 **Red Hat Certified System Administrator (RHCSA)**, currently preparing for CCNA and RHCE
+- 📄 **Research:** "AI-Based Mock Interview Platform", published in the ICRCET-2026 proceedings
+- 🔐 **Interested in:** web development, Linux and security
 
-## Edit
+**Mostly working with:** Java · SQL · JavaScript · TypeScript · Next.js · React · Node.js · PostgreSQL · Docker · Linux (RHEL)
 
-Open `index.html`, change the text, commit. GitHub Pages republishes automatically in about a minute.
-
-## Contact
-
-aadhivishwanathan@gmail.com
+**Find me:** [Website](https://vishwanathan.dev) · [LinkedIn](https://www.linkedin.com/in/vishwanathanirv) · [ORCID](https://orcid.org/0009-0005-6436-9098) · [LeetCode](https://leetcode.com/u/Vishwanathanirv/) · [Chess (coralctrl)](https://www.chess.com/member/coralctrl)
