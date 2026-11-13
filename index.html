@@ -93,8 +93,12 @@ h1{margin:0;font-weight:500;font-size:clamp(2.6rem,6.4vw,4.1rem);white-space:now
 .sq em{line-height:1}
 .sq.opt::after{content:"";position:absolute;left:50%;top:50%;width:20%;height:20%;margin:-10% 0 0 -10%;border-radius:50%;background:var(--ink);opacity:.3;pointer-events:none}
 .board.play .sq{cursor:default}.board.play .sq.opt{cursor:pointer}
-.ctrl{display:flex;gap:16px;justify-content:center;white-space:nowrap;margin-top:-4px}
-.ctrl button{font:inherit;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);background:none;border:0;border-bottom:1px solid transparent;padding:2px 0;cursor:pointer;transition:color .2s,border-color .2s}
+.sq.pop{animation:pop .5s ease}
+@keyframes pop{0%,100%{filter:none}35%{filter:brightness(1.12) saturate(1.5)}}
+.board.play{touch-action:none}
+.knight.drag{transition:none;opacity:.85}
+.ctrl{display:flex;gap:13px;justify-content:center;white-space:nowrap;margin-top:-4px;height:16px}
+.ctrl button{font:inherit;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);background:none;border:0;border-bottom:1px solid transparent;padding:2px 0;cursor:pointer;transition:color .2s,border-color .2s}
 .ctrl button:hover,.ctrl button:focus-visible{color:var(--ink);border-color:var(--ink);outline:none}
 .sq.dk{background:#E7E4DD}
 .sq.v{background:var(--c)}
@@ -169,6 +173,27 @@ section{padding-block:52px;scroll-margin-top:64px}
   section,article,.year,.paper{break-inside:avoid}
   .reach .big{font-size:2rem}
 }
+
+/* terminal */
+.tbtn{font:inherit;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--faint);background:none;border:1px solid var(--line);border-radius:6px;padding:2px 7px;margin-left:12px;cursor:pointer;transition:color .2s,border-color .2s}
+.tbtn:hover,.tbtn:focus-visible{color:var(--ink);border-color:var(--ink);outline:none}
+.term{position:fixed;left:50%;bottom:24px;z-index:50;width:min(600px,calc(100vw - 32px));transform:translate(-50%,12px);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
+.term.open{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+.tbox{background:#141619;color:#E9E6E0;border-radius:12px;box-shadow:0 18px 50px rgba(20,22,25,.28);font-family:var(--mono);font-size:12.5px;line-height:1.6;overflow:hidden}
+.tbar{display:flex;align-items:center;gap:8px;padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.08);color:#8F949B;font-size:11px}
+.tbar i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.tbar i:nth-child(1){background:#C9A396}.tbar i:nth-child(2){background:#C7AE7E}.tbar i:nth-child(3){background:#9DB28E}
+.tbar span{flex:1;text-align:center;margin-right:30px}
+.tbar button{background:none;border:0;color:#8F949B;font:inherit;font-size:15px;cursor:pointer;line-height:1}
+.tout{height:min(260px,45vh);overflow-y:auto;padding:10px 14px 0;white-space:pre-wrap;word-break:break-word}
+.tout .c{color:#9DB28E}.tout .d{color:#8F949B}.tout .a{color:#DCE4EC}
+.tout a{color:#DCE4EC}
+.tin{display:flex;gap:8px;padding:6px 14px 12px}
+.tin .ps{color:#9DB28E;white-space:nowrap}
+.tin input{flex:1;min-width:0;background:none;border:0;outline:none;color:#E9E6E0;font:inherit;caret-color:#EFE6D3}
+@media (max-width:640px){ .tin input{font-size:16px} }
+@media (prefers-reduced-motion:reduce){ .term{transition:none} }
+@media print{ .term,.tbtn{display:none!important} }
 /* hero badges: classic legendary hex */
 .badges{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
 .cert{position:relative;width:58px;height:66px}
@@ -226,7 +251,7 @@ img{max-width:100%}
       <div class="badges" aria-label="Certifications">
         <a class="cert legend" href="https://www.credly.com/badges/f35e390a-d50b-4a5c-b26b-937e6cc675c3/public_url" target="_blank" rel="noopener" title="RHCSA · Red Hat Certified System Administrator · Verify on Credly" aria-label="RHCSA certified, verify on Credly"><div class="hex"><div class="face"><b>RHCSA</b></div></div></a>
       </div>
-      <p class="next">Currently preparing · CCNA · RHCE · Dec 2026</p>
+      <p class="next">Currently preparing · CCNA · RHCE</p>
     </div>
     <figure class="tour" style="margin:0"><div class="board" id="board" role="group" aria-label="Knight's tour on a 5 by 5 board. Watch it solve, or play it yourself."></div><figcaption id="tourcap" aria-live="polite">Knight's tour · 5×5</figcaption><div class="ctrl" id="tourctrl"></div></figure>
   </header>
@@ -242,25 +267,25 @@ img{max-width:100%}
   <section id="projects">
     <h2 class="label">Projects</h2>
     <div class="rows">
-      <article class="prow">
+      <article class="prow" id="p-neem">
         <h3>Neemberry Store</h3>
         <p>A complete online store for a new wellness brand, built from scratch: checkout and payments, sign-in with phone verification, a live support chat and admin tools.</p>
         <p class="how"><b>How it's built:</b> built solo and running in production. A MedusaJS backend and PostgreSQL run in Docker, behind a Next.js storefront on Cloudflare.</p>
         <div class="pfoot"><div class="stack">Next.js · MedusaJS · TypeScript · PostgreSQL · Docker</div><span class="stack">Built at work</span></div>
       </article>
-      <article class="prow">
+      <article class="prow" id="p-mock">
         <h3>Mock Interview AI</h3>
         <p>A voice interviewer that listens, adapts its next question and gives feedback. Tested over 50+ sessions with a 95% completion rate.</p>
         <p class="how"><b>How it's built:</b> Vapi handles the voice and speech-to-text, while Next.js and Firebase run the sessions and feedback, with a 1.2-second average AI response. Published in the ICRCET-2026 proceedings.</p>
         <div class="pfoot"><div class="stack">Next.js · Node.js · TypeScript · Firebase · Vapi</div><a class="gh" href="https://github.com/Vishwanathanirv/ai_mock_interviews" target="_blank" rel="noopener">GitHub</a></div>
       </article>
-      <article class="prow">
+      <article class="prow" id="p-fraud">
         <h3>Payment Fraud Detection</h3>
         <p>Real-time scoring that separates genuine payments from suspicious ones, with live and batch checks and drift monitoring, reaching a 93.1% F1-score and 0.985 ROC-AUC.</p>
         <p class="how"><b>How it's built:</b> an ensemble of XGBoost and CatBoost on PCA-reduced features, served through a Streamlit dashboard.</p>
         <div class="pfoot"><div class="stack">XGBoost · CatBoost · Streamlit</div><a class="gh" href="https://github.com/Vishwanathanirv/Online-payment-fraud-detection" target="_blank" rel="noopener">GitHub</a></div>
       </article>
-      <article class="prow">
+      <article class="prow" id="p-med">
         <h3>Privacy-Preserving Medical Records</h3>
         <p>Hides encrypted patient records inside CT scans using reversible watermarking, with role-based access for doctors and patients.</p>
         <p class="how"><b>How it's built:</b> a Streamlit app for doctors and patients. Because the watermark is reversible, the original scan comes back exactly as it was.</p>
@@ -362,7 +387,14 @@ img{max-width:100%}
     </div>
   </section>
 
-  <footer><span>© 2026 Vishwanathan Rajagopal</span><span>Made with care</span></footer>
+  <footer><span>© 2026 Vishwanathan Rajagopal</span><span>Made with care<button class="tbtn" type="button" id="tbtn" aria-label="Open terminal" title="Open terminal (press ~)">&gt;_</button></span></footer>
+  <div class="term" id="term" role="dialog" aria-label="Terminal" aria-hidden="true">
+    <div class="tbox">
+      <div class="tbar"><i></i><i></i><i></i><span>guest@vishwanathan.dev: ~</span><button type="button" id="tclose" aria-label="Close terminal">×</button></div>
+      <div class="tout" id="tout" aria-live="polite"></div>
+      <form class="tin" id="tform" autocomplete="off"><label class="ps" for="tin">guest:~$</label><input id="tin" spellcheck="false" autocapitalize="off" aria-label="Type a command"></form>
+    </div>
+  </div>
 </main>
 
 <script>
@@ -381,7 +413,9 @@ img{max-width:100%}
   for(var i=0;i<N*N;i++){(function(i){var r=i/N|0,c=i%N;
     var d=document.createElement("button");d.type="button";d.className="sq"+((r+c)%2?" dk":"");
     d.setAttribute("aria-label","Row "+(r+1)+", column "+(c+1));d.innerHTML="<em></em>";
-    d.addEventListener("click",function(){tap(i);});d.addEventListener("animationend",function(){d.classList.remove("no");});board.appendChild(d);sqs.push(d);})(i);}
+    d.addEventListener("click",function(){if(dragged){dragged=false;return;}tap(i);});
+    d.addEventListener("animationend",function(){d.classList.remove("no","pop");});
+    board.appendChild(d);sqs.push(d);})(i);}
   var ns="http://www.w3.org/2000/svg",svg=document.createElementNS(ns,"svg");svg.setAttribute("class","path");svg.setAttribute("viewBox","0 0 5 5");svg.setAttribute("aria-hidden","true");
   var line=document.createElementNS(ns,"polyline");svg.appendChild(line);board.appendChild(svg);
   var kn=document.createElement("span");kn.className="knight";kn.setAttribute("aria-hidden","true");kn.textContent="♞︎";kn.style.opacity="0";board.appendChild(kn);
@@ -390,51 +424,67 @@ img{max-width:100%}
     function go(i){if(p.length===N*N)return true;
       var n=moves(i,seen).map(function(j){seen[j]=1;var d=moves(j,seen).length;seen[j]=0;return [j,d];}).sort(function(a,b){return a[1]-b[1];});
       for(var k=0;k<n.length;k++){seen[n[k][0]]=1;p.push(n[k][0]);if(go(n[k][0]))return true;p.pop();seen[n[k][0]]=0;}return false;}
-    if(((pre[0]/N|0)+pre[0]%N)%2)return null;
     return go(p[p.length-1])?p:null;}
   function say(t){cap.textContent=t;}
   function buttons(list){ctrl.innerHTML="";list.forEach(function(b){var e=document.createElement("button");e.type="button";e.textContent=b[0];e.addEventListener("click",b[1]);ctrl.appendChild(e);});}
-  function seenOf(){var s=[];path.forEach(function(i){s[i]=1;});return s;}
+    function seenOf(){var s=[];path.forEach(function(i){s[i]=1;});return s;}
+  function place(i){kn.style.opacity="1";kn.style.transform="translate("+(i%N*100)+"%,"+((i/N|0)*100)+"%)";}
   function draw(){
-    sqs.forEach(function(q,i){q.classList.remove("v","cur","opt");q.querySelector("em").textContent="";});
+    sqs.forEach(function(q){q.classList.remove("v","cur","opt");q.querySelector("em").textContent="";});
     path.forEach(function(i,k){var q=sqs[i];q.style.setProperty("--c","var("+pal[k%5]+")");q.querySelector("em").textContent=k+1;q.classList.add("v");});
-    if(path.length){var last=path[path.length-1];sqs[last].classList.add("cur");kn.style.opacity="1";kn.style.transform="translate("+(last%N*100)+"%,"+((last/N|0)*100)+"%)";}
-    else kn.style.opacity="0";
+    if(path.length){var last=path[path.length-1];sqs[last].classList.add("cur");place(last);}else kn.style.opacity="0";
     line.setAttribute("points",path.map(function(i){return (i%N+.5)+","+((i/N|0)+.5);}).join(" "));
-    if(mode==="play"&&path.length)moves(path[path.length-1],seenOf()).forEach(function(j){sqs[j].classList.add("opt");});
+    if(mode==="play"&&path.length&&path.length<N*N)moves(path[path.length-1],seenOf()).forEach(function(j){sqs[j].classList.add("opt");});
   }
-  function stop(){clearInterval(timer);timer=null;clearTimeout(hold);}
-  function done(msg){board.classList.remove("done");void board.offsetWidth;board.classList.add("done");say(msg);}
-  /* ---- watch mode ---- */
-  function tick(){if(path.length>=N*N)return;path.push(plan[path.length]);draw();say("Knight's tour · 5×5 · "+path.length+"/25");
-    if(path.length===N*N){stop();done("Solved · 25/25 ✓");if(mode==="watch")hold=setTimeout(function(){var ok=[];for(var i=0;i<N*N;i++)if(((i/N|0)+i%N)%2===0)ok.push(i);watch(ok[Math.random()*ok.length|0]);},reduce?6000:3000);}}
-  function run(){if(!timer&&!reduce&&onScreen&&!document.hidden&&plan.length&&path.length<N*N)timer=setInterval(tick,640);}
-  function watch(start){stop();mode="watch";board.classList.remove("play","done");plan=solveFrom([start]);path=[];
-    buttons([["Play it yourself",play]]);
+  function stopAll(){clearInterval(timer);timer=null;clearTimeout(hold);}
+  /* finale: the whole tour replays as a ripple of light */
+  function finale(msg,after){board.classList.remove("done");void board.offsetWidth;board.classList.add("done");say(msg);
+    var seq=path.slice();seq.forEach(function(i,k){setTimeout(function(){sqs[i].classList.remove("pop");void sqs[i].offsetWidth;sqs[i].classList.add("pop");},reduce?0:k*90);});
+    if(after)hold=setTimeout(after,reduce?6000:seq.length*90+2600);}
+  /* ---- watch ---- */
+  function tick(){if(path.length>=N*N)return;var j=plan[path.length];path.push(j);draw();say("Knight's tour · 5×5 · "+path.length+"/25");
+    if(path.length===N*N){clearInterval(timer);timer=null;finale("Solved · 25/25 ✓",function(){var ok=[];for(var i=0;i<N*N;i++)if(((i/N|0)+i%N)%2===0)ok.push(i);watch(ok[Math.random()*ok.length|0]);});}}
+  function run(){if(mode==="watch"&&!timer&&!reduce&&onScreen&&!document.hidden&&plan.length&&path.length<N*N)timer=setInterval(tick,640);}
+  function watch(start){stopAll();mode="watch";board.classList.remove("play","done");plan=solveFrom([start]);path=[];refresh();
     if(reduce){path=plan.slice();draw();say("Solved · 25/25 ✓");return;}tick();run();}
-  /* ---- play mode ---- */
-  function play(){stop();mode="play";board.classList.add("play");board.classList.remove("done");path=[];plan=[];draw();
-    say("Your move · pick a square");buttons([["Watch it solve",function(){watch(0);}]]);}
-  function playButtons(){buttons([["Undo",function(){if(path.length){path.pop();draw();status();}}],["Hint",hint],["Restart",play],["Watch",function(){watch(0);}]]);}
+  /* ---- play ---- */
+  function play(){stopAll();mode="play";board.classList.add("play");board.classList.remove("done");path=[];plan=[];draw();refresh();
+    say("Your move · pick a square");}
+  function refresh(){
+    if(mode==="watch")buttons([["Play it yourself",play]]);
+    else if(path.length===N*N)buttons([["Play again",play],["Watch",function(){watch(0);}]]);
+    else if(path.length)buttons([["Undo",undo],["Reset",play],["Watch",function(){watch(0);}]]);
+    else buttons([["Watch",function(){watch(0);}]]);}
+  function undo(){if(path.length>1){path.pop();draw();status();}else play();}
   function status(){
-    if(!path.length){say("Your move · pick a square");return;}
     var left=moves(path[path.length-1],seenOf()).length;
-    if(path.length===N*N){done("You did it · 25/25 ✓");buttons([["Play again",play],["Watch",function(){watch(0);}]]);return;}
+    if(path.length===N*N){refresh();finale("You did it · 25/25 ✓");return;}
     if(!left){say("Stuck at "+path.length+"/25");return;}
     say("Your tour · "+path.length+"/25");}
-  function hint(){if(!path.length){say("Tip · start on a light square");return;}
-    var sol=solveFrom(path);
-    if(!sol){say("No full tour from here");return;}
-    var j=sol[path.length];sqs[j].classList.remove("no");void sqs[j].offsetWidth;sqs[j].classList.add("no");say("Try the flashing square");}
+  function move(i){path.push(i);draw();status();}
   function tap(i){
     if(mode==="watch"){if(((i/N|0)+i%N)%2){flash(i);say("No tour from there");return;}watch(i);return;}
-    if(!path.length){path=[i];draw();playButtons();status();return;}
-    if(sqs[i].classList.contains("opt")){path.push(i);draw();status();return;}
+    if(path.length===N*N||(path.length&&i===path[path.length-1]))return;
+    if(!path.length){path=[i];draw();refresh();status();return;}
+    if(sqs[i].classList.contains("opt")){move(i);return;}
     flash(i);say("Moves are L-shaped");}
   function flash(i){sqs[i].classList.remove("no");void sqs[i].offsetWidth;sqs[i].classList.add("no");}
+  /* drag the knight (mouse or finger) in play mode */
+  var drag=null,dragged=false;
+  board.addEventListener("pointerdown",function(e){if(mode!=="play"||!path.length||path.length===N*N)return;
+    var last=path[path.length-1],rc=board.getBoundingClientRect(),cs=rc.width/N,x=e.clientX-rc.left,y=e.clientY-rc.top;
+    if((y/cs|0)*N+(x/cs|0)!==last)return;drag={rc:rc,cs:cs};kn.classList.add("drag");board.setPointerCapture(e.pointerId);});
+  board.addEventListener("pointermove",function(e){if(!drag)return;dragged=true;
+    var x=e.clientX-drag.rc.left-drag.cs/2,y=e.clientY-drag.rc.top-drag.cs/2;kn.style.transform="translate("+x+"px,"+y+"px)";});
+  function endDrag(e){if(!drag)return;var rc=drag.rc,cs=drag.cs,x=e.clientX-rc.left,y=e.clientY-rc.top;drag=null;kn.classList.remove("drag");
+    if(!dragged)return;var j=(x>=0&&y>=0&&x<rc.width&&y<rc.height)?(y/cs|0)*N+(x/cs|0):-1;
+    if(j>=0&&sqs[j].classList.contains("opt"))move(j);else{place(path[path.length-1]);if(j>=0&&j!==path[path.length-1]){flash(j);say("Moves are L-shaped");}}
+    setTimeout(function(){dragged=false;},0);}
+  board.addEventListener("pointerup",endDrag);board.addEventListener("pointercancel",endDrag);
   if("IntersectionObserver" in window)new IntersectionObserver(function(e){onScreen=e[0].isIntersecting;onScreen?run():(clearInterval(timer),timer=null);}).observe(board);
   document.addEventListener("visibilitychange",function(){document.hidden?(clearInterval(timer),timer=null):run();});
   watch(0);
+  window.__tour={play:play,watch:function(){watch(0);}};
 
   var bar=document.getElementById("bar"),links=[].slice.call(document.querySelectorAll(".bar nav a"));
   function onScroll(){
@@ -444,6 +494,55 @@ img{max-width:100%}
     links.forEach(function(a,i){a.classList.toggle("on",i===cur);});
   }
   addEventListener("scroll",onScroll,{passive:true});onScroll();
+})();
+
+/* ---------- a tiny terminal (press ~) ---------- */
+(function(){
+  var term=document.getElementById("term"),out=document.getElementById("tout"),form=document.getElementById("tform"),inp=document.getElementById("tin"),btn=document.getElementById("tbtn"),last=null,hist=[],hi=0,booted=false;
+  function esc(t){return String(t).replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c];});}
+  function print(html,cls){var d=document.createElement("div");if(cls)d.className=cls;d.innerHTML=html;out.appendChild(d);out.scrollTop=out.scrollHeight;}
+  function go(id){close();var t=document.getElementById(id);if(t)t.scrollIntoView({behavior:"smooth"});}
+  function open(){if(term.classList.contains("open"))return;last=document.activeElement;term.classList.add("open");term.setAttribute("aria-hidden","false");
+    if(!booted){booted=true;print('<span class="c">vishwanathan.dev</span> · type <span class="a">help</span> to look around');}
+    setTimeout(function(){inp.focus();},30);}
+  function close(){term.classList.remove("open");term.setAttribute("aria-hidden","true");inp.blur();if(last&&last.focus)last.focus();}
+  var C={
+    help:function(){return 'whoami     who is this\nls         what\'s here\ncat about  a short intro\nprojects   things I\'ve built\nskills     what I work with\nresearch   my paper\ncd <place> jump to a section\nopen <x>   github · linkedin · orcid · resume\nemail      copy my email\nneofetch   system info\nplay       play the knight\'s tour\nclear      clear the screen\nexit       close';},
+    whoami:function(){return 'Vishwanathan R (Vishwanathan Rajagopal)\ndeveloper · Tamil Nadu, India · RHCSA';},
+    ls:function(a){if(a==="projects")return C.projects();return '<span class="a">about/  projects/  skills/  journey/  research/  contact/</span>  resume.pdf';},
+    cat:function(a){
+      if(a==="about"||a==="about/")return 'I build web products end to end, from the interface\nto the servers and networks underneath, mostly for fun.\nFoundation in Java; web with Next.js and Node.js.\nOutside work: chess (coralctrl) and anime.';
+      if(a==="research"||a==="research/")return C.research();
+      if(a==="resume.pdf")return 'binary file · try <span class="a">open resume</span>';
+      return 'cat: '+esc(a||"")+': no such file';},
+    projects:function(){return '• Neemberry Store          live in production\n• Mock Interview AI        published\n• Payment Fraud Detection  93.1% F1\n• Medical Records Privacy  reversible watermarking\n<span class="d">cd projects to see them</span>';},
+    skills:function(){return 'core      Java, SQL, JavaScript, TypeScript, Next.js, React, Node.js\nsystems   Linux (RHEL), Docker, PostgreSQL, Cloudflare\nsecurity  network security, Linux hardening, secure web apps';},
+    research:function(){return '"AI-Based Mock Interview Platform"\npublished · ICRCET-2026 proceedings · ISBN 978-81-981425-2-8\nalso presented · ICA6NT 2026';},
+    cd:function(a){a=(a||"").replace(/\/$/,"");if(!a||a==="~"){close();scrollTo({top:0,behavior:"smooth"});return null;}
+      if(["about","projects","skills","journey","research","contact"].indexOf(a)>-1){go(a);return null;}return 'cd: '+esc(a)+': no such place';},
+    open:function(a){var L={github:"https://github.com/Vishwanathanirv",linkedin:"https://www.linkedin.com/in/vishwanathanirv",orcid:"https://orcid.org/0009-0005-6436-9098",resume:"/resume.pdf",chess:"https://www.chess.com/member/coralctrl"};
+      if(L[a]){window.open(L[a],"_blank","noopener");return 'opening '+esc(a)+'…';}return 'usage: open github | linkedin | orcid | resume | chess';},
+    email:function(){try{navigator.clipboard.writeText("mail@vishwanathan.dev");}catch(e){}return 'mail@vishwanathan.dev <span class="d">(copied)</span>';},
+    neofetch:function(){return '<span class="c">♞ guest@vishwanathan.dev</span>\n<span class="d">─────────────────────</span>\nos        human · RHCSA edition\nlocation  Tamil Nadu, India\nshell     curiosity\neditor    cursor + claude\nuptime    since 2022 (B.Tech)\nhobbies   building things, chess';},
+    play:function(){close();var t=document.querySelector(".tour");if(t)t.scrollIntoView({behavior:"smooth",block:"center"});if(window.__tour)window.__tour.play();return null;},
+    date:function(){return new Date().toLocaleString("en-IN",{timeZone:"Asia/Kolkata",dateStyle:"medium",timeStyle:"short"})+' in India';},
+    sudo:function(a){if(/^hire( vishwanathan)?$/.test(a||"")){setTimeout(function(){location.href="mailto:mail@vishwanathan.dev?subject=Let%27s%20work%20together";},900);return '[sudo] password for guest: ********\n<span class="c">access granted ✓</span> opening a new email…';}
+      return 'guest is not in the sudoers file. nice try 🙂';},
+    rm:function(a){return /-rf/.test(a||"")?'permission denied. I\'m RHCSA certified, you know 😉':'rm: missing operand';},
+    clear:function(){out.innerHTML="";return null;},
+    exit:function(){close();return null;}
+  };
+  C.about=function(){return C.cat("about");};C.contact=C.email;C.hire=function(){return 'try <span class="a">sudo hire vishwanathan</span>';};C.pwd=function(){return '/home/guest';};C.echo=function(a){return esc(a||"");};
+  form.addEventListener("submit",function(e){e.preventDefault();var raw=inp.value.trim();inp.value="";if(!raw)return;hist.push(raw);hi=hist.length;
+    print('<span class="c">guest:~$</span> '+esc(raw));var p=raw.split(/\s+/),cmd=p.shift().toLowerCase(),arg=p.join(" ").toLowerCase();
+    var f=C[cmd],r=f?f(arg):'command not found: '+esc(cmd)+' · try <span class="a">help</span>';if(r)print(r);});
+  inp.addEventListener("keydown",function(e){if(e.key==="ArrowUp"){if(hi>0){hi--;inp.value=hist[hi];}e.preventDefault();}
+    else if(e.key==="ArrowDown"){if(hi<hist.length){hi++;inp.value=hist[hi]||"";}e.preventDefault();}});
+  btn.addEventListener("click",open);document.getElementById("tclose").addEventListener("click",close);
+  document.addEventListener("keydown",function(e){
+    if(e.key==="Escape"&&term.classList.contains("open")){close();return;}
+    var tag=(e.target.tagName||"").toLowerCase();if(tag==="input"||tag==="textarea"||e.target.isContentEditable)return;
+    if(e.key==="~"||e.key==="`"){e.preventDefault();term.classList.contains("open")?close():open();}});
 })();
 </script>
 </body>
