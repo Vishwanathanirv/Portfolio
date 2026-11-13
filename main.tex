@@ -1,0 +1,109 @@
+% Vishwanathan R - Resume (self-contained, no custom class needed)
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[a4paper,top=0.8cm,bottom=0.8cm,left=1.4cm,right=1.4cm]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage[hidelinks]{hyperref}
+\IfFileExists{fontawesome5.sty}{\usepackage{fontawesome5}\newcommand{\ghicon}{\faGithub\ }\newcommand{\inicon}{\faLinkedin\ }\newcommand{\webicon}{\faGlobe\ }}{\newcommand{\ghicon}{}\newcommand{\inicon}{}\newcommand{\webicon}{}}
+
+\definecolor{theme}{named}{MidnightBlue}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\linespread{1.0}
+
+% Section style: coloured small caps with a rule
+\titleformat{\section}{\color{theme}\large\bfseries\scshape}{}{0pt}{}[\vspace{-0.6ex}{\color{theme}\titlerule[0.8pt]}]
+\titlespacing*{\section}{0pt}{1ex}{0.6ex}
+
+% Helpers
+\newcommand{\entry}[2]{\textbf{#1}\hfill\textbf{#2}\\}
+\newcommand{\sub}[2]{#1\hfill#2\par}
+\newenvironment{points}{\vspace{0.3ex}\begin{list}{\color{theme}\textbullet}{\setlength{\leftmargin}{1.1em}\setlength{\itemsep}{0.15ex}\setlength{\parsep}{0pt}\setlength{\topsep}{0pt}}}{\end{list}\vspace{0.4ex}}
+\newcommand{\skillrow}[2]{\textbf{#1} & #2 \\[0.15ex]}
+\newcommand{\sep}{\ {\color{theme}\textbar}\ }
+
+\begin{document}
+
+% ---------- Header ----------
+\begin{center}
+  {\color{theme}\Huge Vishwanathan R}\\[0.5ex]
+  {\large \href{https://www.credly.com/badges/f35e390a-d50b-4a5c-b26b-937e6cc675c3/public_url}{Red Hat Certified System Administrator (RHCSA)}}\\[0.6ex]
+  vishwanathanirv@gmail.com \sep +91 9715482673 \sep Tamil Nadu, India\\[0.3ex]
+  \href{https://vishwanathan.dev}{\webicon vishwanathan.dev} \sep
+  \href{https://github.com/vishwanathanirv}{\ghicon github.com/vishwanathanirv} \sep
+  \href{https://www.linkedin.com/in/vishwanathanirv}{\inicon linkedin.com/in/vishwanathanirv}
+\end{center}
+\vspace{-1.2ex}
+
+% ---------- Education ----------
+\section{Education \& Publication}
+\entry{Bachelor of Technology, Information Technology}{2022 -- 2026}
+\sub{Sri Krishna College of Engineering and Technology (Anna University), CGPA 7.5/10}{Coimbatore, India}
+\vspace{0.4ex}\textbf{Publication:} ``AI-Based Mock Interview Platform,'' Proc. ICRCET-2026, IFERP Academy, Bangalore, Apr 2026, ISBN 978-81-981425-2-8, first author. Also presented at ICA6NT 2026, Velammal Institute of Technology, Chennai.
+
+
+% ---------- Skills ----------
+\section{Technical Skills}
+\begin{tabularx}{\textwidth}{@{}l X@{}}
+\skillrow{Languages}{Java, SQL, JavaScript, TypeScript, C, C++, Bash}
+\skillrow{Backend \& APIs}{RESTful APIs, Node.js, MedusaJS, Authentication (OAuth, OTP), Payment Gateways}
+\skillrow{Frontend}{React, Next.js, HTML5, CSS3, Responsive Design}
+\skillrow{Databases}{PostgreSQL, MySQL, Supabase, Firebase Firestore (NoSQL)}
+\skillrow{Cloud \& DevOps}{Docker, Git, GitHub, Linux Server Administration, Cloudflare, Vercel, Postman}
+\skillrow{Systems \& Networking}{RHEL, Shell Scripting, SELinux, TCP/IP, DNS, DHCP, Routing and Switching, VLANs}
+\skillrow{Security}{Network Security, Intrusion Detection, Packet Analysis, Secure Authentication}
+\skillrow{Practices}{AI-Assisted Development (Cursor, Claude), Debugging, Troubleshooting}
+\end{tabularx}
+
+% ---------- Experience ----------
+\section{Professional Experience}
+\entry{Neemberry}{Oct 2026 -- Present}
+\sub{Associate Product Engineer}{Tamil Nadu, India}
+\begin{points}
+  \item Own end-to-end development of the company's e-commerce platform as the \textbf{sole engineer}, from system design and \textbf{API development} to deployment and production support.
+  \item Manage production infrastructure across \textbf{Cloudflare} (DNS, CDN) and \textbf{Docker}-based environments, and deliver operations dashboards for live order alerts and refill reminders.
+\end{points}
+
+\entry{Rainberry Inc. (formerly BitTorrent Inc.)}{Oct 2024 -- Dec 2024}
+\sub{Software Engineering Intern}{Remote}
+\begin{points}
+  \item Maintained a \textbf{production} e-commerce storefront serving live traffic, diagnosing and resolving data-integrity issues that caused checkout friction.
+  \item Delivered product-listing and checkout UI enhancements with cross-functional stakeholders, translating business requirements into shipped features.
+  \item Administered \textbf{Linux} servers and enforced data-security standards in transaction handling, ensuring uptime and compliance.
+\end{points}
+
+% ---------- Projects ----------
+\section{Notable Projects}
+\entry{Neemberry E-Commerce Platform}{Live in production}
+\sub {MedusaJS v2, Node.js, TypeScript, Next.js, PostgreSQL, Docker}{Sole Developer}
+\begin{points}
+  \item Architected and delivered a direct-to-consumer e-commerce platform end to end, comprising a \textbf{MedusaJS v2} backend, \textbf{Next.js} storefront and \textbf{PostgreSQL} database, fully containerised with \textbf{Docker}.
+  \item Engineered a one-page checkout with \textbf{Razorpay} payment gateway integration and cash on delivery with a partial online advance, served through \textbf{REST APIs} for guest and registered customers.
+  \item Implemented \textbf{secure authentication} (Google OAuth, email sign-in, phone OTP verification) and a \textbf{real-time} customer support chat with an admin inbox.
+\end{points}
+
+\entry{AI Mock Interview Platform}{\href{https://github.com/Vishwanathanirv/ai_mock_interviews}{\color{theme}GitHub}}
+\sub{Next.js, Node.js, TypeScript, Firebase, Vapi Voice AI}{}
+\begin{points}
+  \item Designed and built a cloud-based, voice-driven interview platform featuring real-time speech-to-text, adaptive AI-generated questioning and structured feedback, delivered in four weeks.
+  \item Achieved a \textbf{95\% session completion rate} and \textbf{1.2-second} average AI response latency across 50+ sessions with 15 users; research published in the \textbf{ICRCET-2026 proceedings}.
+\end{points}
+
+\entry{Real-Time Network Intrusion Detection System}{\href{https://github.com/Vishwanathanirv/Real-time-Intrusion-Detection-System-main}{\color{theme}GitHub}}
+\sub{Scapy, LightGBM, Isolation Forest, SQLite}{}
+\begin{points}
+  \item Engineered a real-time intrusion detection system that captures live network traffic and flags \textbf{DDoS} and anomalous activity using ensemble ML models, with instant alerting, event logging and SSH brute-force attack simulation.
+\end{points}
+
+\entry{Payment Fraud Detection System}{\href{https://github.com/Vishwanathanirv/Online-payment-fraud-detection}{\color{theme}GitHub}}
+\sub{XGBoost, CatBoost, Streamlit}{}
+\begin{points}
+  \item Built a real-time transaction-scoring pipeline with an interactive dashboard for live and batch prediction and model-drift monitoring, achieving a \textbf{93.1\% F1-score} and \textbf{0.985 ROC-AUC} on 284,807 transactions.
+  \item Combined XGBoost and CatBoost into an ensemble model, applying feature engineering and PCA-based dimensionality reduction to detect fraud in a highly imbalanced dataset (0.17\% fraud cases).
+\end{points}
+
+\end{document}
