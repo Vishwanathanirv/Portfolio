@@ -3,6 +3,7 @@
 > Developer from Tamil Nadu, India, who builds web products end to end for the love of it. Red Hat Certified System Administrator (RHCSA), author of a published research paper, strong interest in security. Plays chess as coralctrl.
 
 - Website: https://vishwanathan.dev/
+- Email: mail@vishwanathan.dev
 - Also known as: Vishwanathan R, Vishwanathan Rajagopal, coralctrl, vishwanathanirv
 - Work: Associate Product Engineer at Neemberry (Oct 2026 – present); Software Engineering Intern at Rainberry Inc., formerly BitTorrent (Oct – Dec 2024)
 - Education: B.Tech, Information Technology, Sri Krishna College of Engineering and Technology, Coimbatore (2022 – 2026)
