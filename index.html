@@ -151,7 +151,7 @@ section{padding-block:52px;scroll-margin-top:64px}
 
 .next{margin:16px 0 0;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .year p.jl{margin:6px 0 0;color:var(--muted);font-size:14.5px;font-weight:300;line-height:1.55;max-width:56ch}
-.copy{margin-left:14px;vertical-align:middle;font:inherit;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer;transition:color .3s,border-color .3s}
+.copy{display:inline-block;text-decoration:none;margin-left:14px;vertical-align:middle;font:inherit;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer;transition:color .3s,border-color .3s}
 .copy:hover,.copy:focus-visible{color:var(--ink);border-color:var(--ink)}
 @media print{
   .bar,.tour,.copy,.skip{display:none!important}
@@ -248,8 +248,8 @@ img{max-width:100%}
       </article>
       <article class="prow">
         <h3>Payment Fraud Detection</h3>
-        <p>Real-time scoring that separates genuine payments from suspicious ones, with a dashboard for live and batch checks. Reached a 93.1% F1-score and 0.985 ROC-AUC on 284,807 transactions.</p>
-        <p class="how"><b>How it's built:</b> an ensemble of XGBoost and CatBoost on PCA-reduced features, served through a Streamlit dashboard with drift monitoring.</p>
+        <p>Real-time scoring that separates genuine payments from suspicious ones, with live and batch checks and drift monitoring, reaching a 93.1% F1-score and 0.985 ROC-AUC.</p>
+        <p class="how"><b>How it's built:</b> an ensemble of XGBoost and CatBoost on PCA-reduced features, served through a Streamlit dashboard.</p>
         <div class="pfoot"><div class="stack">XGBoost · CatBoost · Streamlit</div><a class="gh" href="https://github.com/Vishwanathanirv/Online-payment-fraud-detection" target="_blank" rel="noopener">GitHub</a></div>
       </article>
       <article class="prow">
@@ -341,7 +341,7 @@ img{max-width:100%}
   <section id="contact">
     <div class="reach">
       <p class="big">Let's <b>talk.</b></p>
-      <span class="mail">mail@vishwanathan.dev</span><button class="copy" type="button" data-email="mail@vishwanathan.dev" aria-label="Copy email address">Copy</button>
+      <span class="mail">mail@vishwanathan.dev</span><button class="copy" type="button" data-email="mail@vishwanathan.dev" aria-label="Copy email address">Copy</button><a class="copy" href="/resume.pdf" target="_blank" rel="noopener" aria-label="Open resume (PDF)">Resume ↗</a>
       <div class="elsewhere">
         <a href="https://github.com/vishwanathanirv" target="_blank" rel="noopener">GitHub</a>
         <a href="https://www.linkedin.com/in/vishwanathanirv" target="_blank" rel="noopener">LinkedIn</a>
