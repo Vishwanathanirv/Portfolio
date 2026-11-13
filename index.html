@@ -76,7 +76,7 @@ h1{margin:0;font-weight:500;font-size:clamp(2.6rem,6.4vw,4.1rem);white-space:now
 
 .tour{display:flex;flex-direction:column;align-items:center;gap:12px;width:clamp(160px,21vw,190px);max-width:100%;justify-self:end}
 @media (max-width:640px){ .tour{justify-self:center} }
-.board{position:relative;display:grid;grid-template-columns:repeat(5,1fr);width:clamp(160px,21vw,190px);aspect-ratio:1;max-width:100%;border-radius:10px;overflow:hidden;box-shadow:0 0 0 1px var(--line)}
+.board{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(5,minmax(0,1fr));width:clamp(160px,21vw,190px);aspect-ratio:1;max-width:100%;border-radius:10px;overflow:hidden;box-shadow:0 0 0 1px var(--line)}
 .sq{position:relative;display:grid;place-items:center;background:#F1EFEA;transition:background .7s,filter .2s;border:0;margin:0;padding:0;font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .sq:hover{filter:brightness(.96)}
 .sq:focus-visible{outline:none;box-shadow:inset 0 0 0 2px var(--ink);z-index:3}
@@ -89,7 +89,13 @@ h1{margin:0;font-weight:500;font-size:clamp(2.6rem,6.4vw,4.1rem);white-space:now
 .sq em{position:relative;z-index:2}
 .board.done{animation:solved 1.4s ease}
 @keyframes solved{0%,100%{box-shadow:0 0 0 1px var(--line)}40%{box-shadow:0 0 0 1px var(--line),0 0 0 7px rgba(157,178,142,.38)}}
-.tour .hint{white-space:nowrap;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);opacity:.8;margin-top:-4px}
+.sq{min-width:0;min-height:0;overflow:hidden}
+.sq em{line-height:1}
+.sq.opt::after{content:"";position:absolute;left:50%;top:50%;width:20%;height:20%;margin:-10% 0 0 -10%;border-radius:50%;background:var(--ink);opacity:.3;pointer-events:none}
+.board.play .sq{cursor:default}.board.play .sq.opt{cursor:pointer}
+.ctrl{display:flex;gap:16px;justify-content:center;white-space:nowrap;margin-top:-4px}
+.ctrl button{font:inherit;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);background:none;border:0;border-bottom:1px solid transparent;padding:2px 0;cursor:pointer;transition:color .2s,border-color .2s}
+.ctrl button:hover,.ctrl button:focus-visible{color:var(--ink);border-color:var(--ink);outline:none}
 .sq.dk{background:#E7E4DD}
 .sq.v{background:var(--c)}
 .sq em{font-style:normal;font-family:var(--mono);font-size:8.5px;color:rgba(20,22,25,.45);opacity:0;transition:opacity .5s}
@@ -222,7 +228,7 @@ img{max-width:100%}
       </div>
       <p class="next">Currently preparing · CCNA · RHCE · Dec 2026</p>
     </div>
-    <figure class="tour" style="margin:0"><div class="board" id="board" role="group" aria-label="Knight's tour on a 5 by 5 board. Choose a square to start a new tour from it."></div><figcaption id="tourcap" aria-live="polite">Knight's tour · 5×5</figcaption><span class="hint" aria-hidden="true">Tap a square to start</span></figure>
+    <figure class="tour" style="margin:0"><div class="board" id="board" role="group" aria-label="Knight's tour on a 5 by 5 board. Watch it solve, or play it yourself."></div><figcaption id="tourcap" aria-live="polite">Knight's tour · 5×5</figcaption><div class="ctrl" id="tourctrl"></div></figure>
   </header>
 
   <section id="about" class="prose">
@@ -368,47 +374,67 @@ img{max-width:100%}
   });
 })();
 (function(){
-  var N=5,board=document.getElementById("board"),cap=document.getElementById("tourcap");
-  var pal=["--blush","--sand","--sage","--mist","--lilac"],sqs=[],order=[],idx=0,timer=null,hold=null;
+  var N=5,board=document.getElementById("board"),cap=document.getElementById("tourcap"),ctrl=document.getElementById("tourctrl");
+  var pal=["--blush","--sand","--sage","--mist","--lilac"],sqs=[],path=[],plan=[],timer=null,hold=null,mode="watch";
   var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches,onScreen=true;
   var MV=[[1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1],[-2,1],[-1,2]];
-  for(var r=0;r<N;r++)for(var c=0;c<N;c++){(function(r,c){
+  for(var i=0;i<N*N;i++){(function(i){var r=i/N|0,c=i%N;
     var d=document.createElement("button");d.type="button";d.className="sq"+((r+c)%2?" dk":"");
-    d.setAttribute("aria-label","Start from row "+(r+1)+", column "+(c+1));d.innerHTML="<em></em>";
-    d.addEventListener("click",function(){pick(r,c,d);});board.appendChild(d);sqs.push(d);})(r,c);}
+    d.setAttribute("aria-label","Row "+(r+1)+", column "+(c+1));d.innerHTML="<em></em>";
+    d.addEventListener("click",function(){tap(i);});d.addEventListener("animationend",function(){d.classList.remove("no");});board.appendChild(d);sqs.push(d);})(i);}
   var ns="http://www.w3.org/2000/svg",svg=document.createElementNS(ns,"svg");svg.setAttribute("class","path");svg.setAttribute("viewBox","0 0 5 5");svg.setAttribute("aria-hidden","true");
   var line=document.createElementNS(ns,"polyline");svg.appendChild(line);board.appendChild(svg);
-  var kn=document.createElement("span");kn.className="knight";kn.setAttribute("aria-hidden","true");kn.textContent="♞︎";board.appendChild(kn);
-  function solve(sr,sc){
-    var seen=[],path=[];
-    function nb(r,c){var o=[];MV.forEach(function(m){var y=r+m[0],x=c+m[1];if(y>=0&&y<N&&x>=0&&x<N&&!seen[y*N+x])o.push([y,x]);});return o;}
-    function go(r,c){seen[r*N+c]=1;path.push([r,c]);if(path.length===N*N)return true;
-      var n=nb(r,c).map(function(p){return [p,nb(p[0],p[1]).length];}).sort(function(a,b){return a[1]-b[1];});
-      for(var i=0;i<n.length;i++)if(go(n[i][0][0],n[i][0][1]))return true;
-      seen[r*N+c]=0;path.pop();return false;}
-    return go(sr,sc)?path:null;}
+  var kn=document.createElement("span");kn.className="knight";kn.setAttribute("aria-hidden","true");kn.textContent="♞︎";kn.style.opacity="0";board.appendChild(kn);
+  function moves(i,seen){var r=i/N|0,c=i%N,o=[];MV.forEach(function(m){var y=r+m[0],x=c+m[1];if(y>=0&&y<N&&x>=0&&x<N&&!seen[y*N+x])o.push(y*N+x);});return o;}
+  function solveFrom(pre){var seen=[],p=pre.slice();p.forEach(function(i){seen[i]=1;});
+    function go(i){if(p.length===N*N)return true;
+      var n=moves(i,seen).map(function(j){seen[j]=1;var d=moves(j,seen).length;seen[j]=0;return [j,d];}).sort(function(a,b){return a[1]-b[1];});
+      for(var k=0;k<n.length;k++){seen[n[k][0]]=1;p.push(n[k][0]);if(go(n[k][0]))return true;p.pop();seen[n[k][0]]=0;}return false;}
+    if(((pre[0]/N|0)+pre[0]%N)%2)return null;
+    return go(p[p.length-1])?p:null;}
   function say(t){cap.textContent=t;}
-  function reset(){sqs.forEach(function(q){q.classList.remove("v","cur");q.querySelector("em").textContent="";});line.setAttribute("points","");board.classList.remove("done");idx=0;}
-  function step(){
-    if(idx>0)sqs[order[idx-1][0]*N+order[idx-1][1]].classList.remove("cur");
-    var p=order[idx],q=sqs[p[0]*N+p[1]];
-    q.style.setProperty("--c","var("+pal[idx%5]+")");q.querySelector("em").textContent=idx+1;q.classList.add("v","cur");
-    kn.style.transform="translate("+(p[1]*100)+"%,"+(p[0]*100)+"%)";
-    line.setAttribute("points",order.slice(0,idx+1).map(function(o){return (o[1]+.5)+","+(o[0]+.5);}).join(" "));
-    idx++;say("Knight's tour · 5×5 · "+idx+"/25");
-    if(idx===N*N){stop();board.classList.add("done");say("Solved · 25/25 ✓");
-      hold=setTimeout(function(){var ok=[];for(var i=0;i<N*N;i++)if(((i/N|0)+i%N)%2===0)ok.push(i);var k=ok[Math.random()*ok.length|0];start(k/N|0,k%N);},reduce?6000:2800);}
+  function buttons(list){ctrl.innerHTML="";list.forEach(function(b){var e=document.createElement("button");e.type="button";e.textContent=b[0];e.addEventListener("click",b[1]);ctrl.appendChild(e);});}
+  function seenOf(){var s=[];path.forEach(function(i){s[i]=1;});return s;}
+  function draw(){
+    sqs.forEach(function(q,i){q.classList.remove("v","cur","opt");q.querySelector("em").textContent="";});
+    path.forEach(function(i,k){var q=sqs[i];q.style.setProperty("--c","var("+pal[k%5]+")");q.querySelector("em").textContent=k+1;q.classList.add("v");});
+    if(path.length){var last=path[path.length-1];sqs[last].classList.add("cur");kn.style.opacity="1";kn.style.transform="translate("+(last%N*100)+"%,"+((last/N|0)*100)+"%)";}
+    else kn.style.opacity="0";
+    line.setAttribute("points",path.map(function(i){return (i%N+.5)+","+((i/N|0)+.5);}).join(" "));
+    if(mode==="play"&&path.length)moves(path[path.length-1],seenOf()).forEach(function(j){sqs[j].classList.add("opt");});
   }
-  function stop(){clearInterval(timer);timer=null;}
-  function run(){if(!timer&&!reduce&&onScreen&&!document.hidden&&idx<N*N)timer=setInterval(step,640);}
-  function start(r,c){clearTimeout(hold);stop();reset();order=solve(r,c);
-    if(reduce){while(idx<N*N)step();return;}step();run();}
-  function pick(r,c,d){
-    if((r+c)%2){d.classList.remove("no");void d.offsetWidth;d.classList.add("no");say("No full tour starts there · try another");return;}
-    start(r,c);}
-  if("IntersectionObserver" in window)new IntersectionObserver(function(e){onScreen=e[0].isIntersecting;onScreen?run():stop();}).observe(board);
-  document.addEventListener("visibilitychange",function(){document.hidden?stop():run();});
-  start(0,0);
+  function stop(){clearInterval(timer);timer=null;clearTimeout(hold);}
+  function done(msg){board.classList.remove("done");void board.offsetWidth;board.classList.add("done");say(msg);}
+  /* ---- watch mode ---- */
+  function tick(){if(path.length>=N*N)return;path.push(plan[path.length]);draw();say("Knight's tour · 5×5 · "+path.length+"/25");
+    if(path.length===N*N){stop();done("Solved · 25/25 ✓");if(mode==="watch")hold=setTimeout(function(){var ok=[];for(var i=0;i<N*N;i++)if(((i/N|0)+i%N)%2===0)ok.push(i);watch(ok[Math.random()*ok.length|0]);},reduce?6000:3000);}}
+  function run(){if(!timer&&!reduce&&onScreen&&!document.hidden&&plan.length&&path.length<N*N)timer=setInterval(tick,640);}
+  function watch(start){stop();mode="watch";board.classList.remove("play","done");plan=solveFrom([start]);path=[];
+    buttons([["Play it yourself",play]]);
+    if(reduce){path=plan.slice();draw();say("Solved · 25/25 ✓");return;}tick();run();}
+  /* ---- play mode ---- */
+  function play(){stop();mode="play";board.classList.add("play");board.classList.remove("done");path=[];plan=[];draw();
+    say("Your move · pick a square");buttons([["Watch it solve",function(){watch(0);}]]);}
+  function playButtons(){buttons([["Undo",function(){if(path.length){path.pop();draw();status();}}],["Hint",hint],["Restart",play],["Watch",function(){watch(0);}]]);}
+  function status(){
+    if(!path.length){say("Your move · pick a square");return;}
+    var left=moves(path[path.length-1],seenOf()).length;
+    if(path.length===N*N){done("You did it · 25/25 ✓");buttons([["Play again",play],["Watch",function(){watch(0);}]]);return;}
+    if(!left){say("Stuck at "+path.length+"/25");return;}
+    say("Your tour · "+path.length+"/25");}
+  function hint(){if(!path.length){say("Tip · start on a light square");return;}
+    var sol=solveFrom(path);
+    if(!sol){say("No full tour from here");return;}
+    var j=sol[path.length];sqs[j].classList.remove("no");void sqs[j].offsetWidth;sqs[j].classList.add("no");say("Try the flashing square");}
+  function tap(i){
+    if(mode==="watch"){if(((i/N|0)+i%N)%2){flash(i);say("No tour from there");return;}watch(i);return;}
+    if(!path.length){path=[i];draw();playButtons();status();return;}
+    if(sqs[i].classList.contains("opt")){path.push(i);draw();status();return;}
+    flash(i);say("Moves are L-shaped");}
+  function flash(i){sqs[i].classList.remove("no");void sqs[i].offsetWidth;sqs[i].classList.add("no");}
+  if("IntersectionObserver" in window)new IntersectionObserver(function(e){onScreen=e[0].isIntersecting;onScreen?run():(clearInterval(timer),timer=null);}).observe(board);
+  document.addEventListener("visibilitychange",function(){document.hidden?(clearInterval(timer),timer=null):run();});
+  watch(0);
 
   var bar=document.getElementById("bar"),links=[].slice.call(document.querySelectorAll(".bar nav a"));
   function onScroll(){
