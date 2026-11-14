@@ -363,7 +363,7 @@ img{max-width:100%}
         <div class="venue"><span class="d">Apr 2026</span><span class="n"><b>ICRCET 2026</b> <span>· Proceedings, ISBN <span style="white-space:nowrap">978-81-981425-2-8</span></span></span><span class="s pub">Published</span></div>
         <div class="venue"><span class="d">Mar 2026</span><span class="n"><b>ICA6NT 2026</b> <span>· Proceedings, ISBN <span style="white-space:nowrap">978-81-985448-5-8</span></span></span><span class="s pub">Published</span></div>
       </div>
-      <div class="pfoot"><div class="stack">DOI <a href="https://doi.org/10.5281/zenodo.24214718" target="_blank" rel="noopener" style="color:inherit">10.5281/zenodo.24214718</a></div><span><a class="gh" href="https://doi.org/10.5281/zenodo.24214718" target="_blank" rel="noopener">Read the paper</a><button class="copy" type="button" id="citebtn" data-cite="Vishwanathan R., Santhosh K., &amp; Sanjay S. (2026). AI-Based Mock Interview Platform. In Proceedings of the 15th International Conference on Recent Challenges in Engineering and Technology (ICRCET-2026). IFERP Academy. https://doi.org/10.5281/zenodo.24214718" aria-label="Copy citation">Cite</button></span></div>
+      <div class="pfoot"><div></div><a class="gh" href="https://doi.org/10.5281/zenodo.24214718" target="_blank" rel="noopener">Read the paper</a></div>
     </div>
       <div class="paper" style="margin-top:40px">
         <h3>ML &amp; AI explorations</h3>
@@ -405,13 +405,6 @@ img{max-width:100%}
   b.addEventListener('click',function(){
     var e=b.getAttribute('data-email'),done=function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1600)};
     if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(e).then(done,function(){location.href='mailto:'+e})}else{location.href='mailto:'+e}
-  });
-})();
-(function(){
-  var c=document.getElementById('citebtn');if(!c)return;
-  c.addEventListener('click',function(){
-    var s=c.getAttribute('data-cite'),done=function(){c.textContent='Copied';setTimeout(function(){c.textContent='Cite'},1600)};
-    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(s).then(done,function(){prompt('Citation',s)})}else{prompt('Citation',s)}
   });
 })();
 (function(){
