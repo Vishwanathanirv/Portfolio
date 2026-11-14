@@ -9,7 +9,7 @@
 - Education: B.Tech, Information Technology, Sri Krishna College of Engineering and Technology, Coimbatore (2022 – 2026)
 - Core skills: Java, SQL, JavaScript, TypeScript, Next.js, React, Node.js, MedusaJS, PostgreSQL, Docker, Linux (RHEL)
 - Certifications: RHCSA (Red Hat Certified System Administrator); currently preparing for CCNA and RHCE
-- Research: "AI-Based Mock Interview Platform", published in the Proceedings of ICRCET-2026 (IFERP Academy, Bangalore, April 2026, ISBN 978-81-981425-2-8); also presented at ICA6NT 2026, Velammal Institute of Technology, Chennai (March 2026)
+- Research: "AI-Based Mock Interview Platform", published in the Proceedings of ICRCET-2026 (IFERP Academy, Bangalore, April 2026, ISBN 978-81-981425-2-8) and, as an abstract, in the Proceedings of ICA6NT 2026 (Velammal Institute of Technology, Chennai, March 2026, p. 29, ISBN 978-81-985448-5-8). DOI: 10.5281/zenodo.24214718 (https://doi.org/10.5281/zenodo.24214718)
 
 ## Profiles
 - GitHub: https://github.com/Vishwanathanirv
